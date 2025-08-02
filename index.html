@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Platform - Interactive Books</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation -->
+        <nav class="nav-glass" id="navigation" style="display: none;">
+            <div class="nav-content">
+                <div class="nav-brand">
+                    <i class="fas fa-book-open"></i>
+                    <span>Learning Platform</span>
+                </div>
+                <div class="nav-menu">
+                    <button class="nav-btn" onclick="showSection('library')">
+                        <i class="fas fa-book"></i> Library
+                    </button>
+                    <button class="nav-btn" onclick="showSection('slides')">
+                        <i class="fas fa-play-circle"></i> Slides
+                    </button>
+                    <button class="nav-btn" onclick="showSection('answers')">
+                        <i class="fas fa-list-check"></i> Check Answers
+                    </button>
+                    <button class="nav-btn" onclick="showSection('scorecard')">
+                        <i class="fas fa-trophy"></i> Score Card
+                    </button>
+                    <button class="nav-btn" onclick="logout()">
+                        <i class="fas fa-sign-out-alt"></i> Logout
+                    </button>
+                </div>
+                <div class="user-info">
+                    <i class="fas fa-user-circle"></i>
+                    <span id="navUserName">User</span>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Login Section -->
+        <section id="loginSection" class="section active">
+            <div class="glass-card login-card">
+                <div class="login-header">
+                    <i class="fas fa-book-reader"></i>
+                    <h1>Learning Platform</h1>
+                    <p>Interactive Book Learning Experience</p>
+                </div>
+                <div class="login-tabs">
+                    <button class="tab-btn active" onclick="showLoginTab('login')">Login</button>
+                    <button class="tab-btn" onclick="showLoginTab('register')">Register</button>
+                </div>
+                
+                <!-- Login Form -->
+                <div id="loginForm" class="login-form active">
+                    <div class="form-group">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="loginUsername" placeholder="Username" required>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="loginPassword" placeholder="Password" required>
+                    </div>
+                    <button class="btn-primary" onclick="login()">
+                        <i class="fas fa-sign-in-alt"></i> Login
+                    </button>
+                </div>
+
+                <!-- Registration Form -->
+                <div id="registerForm" class="login-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="regFullName" placeholder="Full Name" required>
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-briefcase"></i>
+                            <input type="text" id="regDesignation" placeholder="Designation" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <i class="fas fa-users"></i>
+                            <input type="text" id="regTeam" placeholder="Team" required>
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-city"></i>
+                            <input type="text" id="regCity" placeholder="City" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <i class="fas fa-calendar"></i>
+                            <input type="date" id="regDate" required>
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-user-tag"></i>
+                            <input type="text" id="regUsername" placeholder="Choose Username" required>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="regEmail" placeholder="Email" required>
+                        </div>
+                        <div class="form-group">
+                            <i class="fas fa-phone"></i>
+                            <input type="tel" id="regPhone" placeholder="Cell Number" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <i class="fas fa-lock"></i>
+                        <input type="password" id="regPassword" placeholder="Password" required>
+                    </div>
+                    <button class="btn-primary" onclick="register()">
+                        <i class="fas fa-user-plus"></i> Register
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Library Section -->
+        <section id="librarySection" class="section">
+            <div class="library-container">
+                <div class="library-header">
+                    <div class="library-title">
+                        <i class="fas fa-book"></i>
+                        <h1>Library</h1>
+                    </div>
+                    <p class="library-subtitle">Choose Your Learning Journey</p>
+                </div>
+                
+                <div class="books-grid">
+                    <div class="book-card" onclick="startBook('think-grow-rich')">
+                        <div class="book-thumbnail">
+                            <img src="1a.png" alt="Think and Grow Rich" onerror="this.src='https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=400'">
+                            <div class="book-overlay">
+                                <button class="play-btn">
+                                    <i class="fas fa-play"></i>
+                                    Start Reading
+                                </button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3>Think and Grow Rich</h3>
+                            <p class="book-author">by Napoleon Hill</p>
+                            <div class="book-stats">
+                                <span>15 Chapters</span>
+                                <span>Interactive Learning</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="book-card" onclick="startBook('mindset')">
+                        <div class="book-thumbnail">
+                            <img src="2a.png" alt="Mindset: The New Psychology of Success" onerror="this.src='https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg?auto=compress&cs=tinysrgb&w=400'">
+                            <div class="book-overlay">
+                                <button class="play-btn">
+                                    <i class="fas fa-play"></i>
+                                    Start Reading
+                                </button>
+                            </div>
+                        </div>
+                        <div class="book-info">
+                            <h3>Mindset: The New Psychology of Success</h3>
+                            <p class="book-author">by Carol S. Dweck</p>
+                            <div class="book-stats">
+                                <span>8 Chapters</span>
+                                <span>Interactive Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slides Section -->
+        <section id="slidesSection" class="section">
+            <div class="slides-container">
+                <div class="slide-header">
+                    <div class="slide-info">
+                        <h2 id="slideTitle">Loading...</h2>
+                        <p>Welcome, <span id="slideUserName">User</span></p>
+                    </div>
+                    <div class="progress-container">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <span class="progress-text" id="progressText">0%</span>
+                    </div>
+                </div>
+                
+                <div class="slide-content" id="slideContent">
+                    <div class="glass-card slide-card">
+                        <div id="slideText">Loading slide content...</div>
+                    </div>
+                </div>
+
+                <div class="quiz-section" id="quizSection" style="display: none;">
+                    <div class="glass-card quiz-card">
+                        <h3 id="questionTitle">Question 1 of 3</h3>
+                        <p id="questionText">Loading question...</p>
+                        <div class="options-container" id="optionsContainer">
+                            <!-- Options will be populated by JavaScript -->
+                        </div>
+                        <div class="quiz-actions">
+                            <button class="btn-secondary" onclick="previousQuestion()" id="prevQuestionBtn" style="display: none;">
+                                <i class="fas fa-arrow-left"></i> Previous
+                            </button>
+                            <button class="btn-primary" onclick="nextQuestion()" id="nextQuestionBtn">
+                                Next <i class="fas fa-arrow-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="slide-actions">
+                    <button class="btn-secondary" onclick="previousSlide()" id="prevSlideBtn" style="display: none;">
+                        <i class="fas fa-arrow-left"></i> Previous Slide
+                    </button>
+                    <button class="btn-primary" onclick="nextSlide()" id="nextSlideBtn">
+                        Start Quiz <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Score Card Section -->
+        <section id="scorecardSection" class="section">
+            <div class="glass-card scorecard-card">
+                <div class="scorecard-header">
+                    <i class="fas fa-trophy"></i>
+                    <h2>Learning Complete!</h2>
+                    <p>Congratulations on finishing the course!</p>
+                </div>
+                <div class="scorecard-content">
+                    <div class="score-details">
+                        <div class="score-item">
+                            <label>Name:</label>
+                            <span id="scoreName">-</span>
+                        </div>
+                        <div class="score-item">
+                            <label>Marks Obtained:</label>
+                            <span id="scoreMarks">-</span>
+                        </div>
+                        <div class="score-item">
+                            <label>Grade:</label>
+                            <span id="scoreGrade">-</span>
+                        </div>
+                        <div class="score-item">
+                            <label>Time Spent:</label>
+                            <span id="scoreTime">-</span>
+                        </div>
+                        <div class="score-item">
+                            <label>Book:</label>
+                            <span id="scoreBook">-</span>
+                        </div>
+                    </div>
+                    <div class="encouragement" id="encouragementText">
+                        Great job on completing the course!
+                    </div>
+                    <div class="scorecard-actions">
+                        <button class="btn-primary" onclick="downloadScorecard()">
+                            <i class="fas fa-download"></i> Download Certificate
+                        </button>
+                        <button class="btn-secondary" onclick="showSection('library')">
+                            <i class="fas fa-book"></i> Back to Library
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Check Answers Section -->
+        <section id="answersSection" class="section">
+            <div class="glass-card answers-card">
+                <div class="answers-header">
+                    <i class="fas fa-list-check"></i>
+                    <h2>Review Your Answers</h2>
+                    <p>Compare your selected answers with the correct ones</p>
+                </div>
+                <div class="answers-content" id="answersContent">
+                    <!-- Answers will be populated by JavaScript -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Timer Display -->
+    <div class="timer-display" id="timerDisplay">
+        <i class="fas fa-clock"></i>
+        <span id="timerText">00:00:00</span>
+    </div>
+
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        <div class="notification-content">
+            <i class="fas fa-check-circle"></i>
+            <span id="notificationText">Notification</span>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="book.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
