@@ -1,13 +1,12 @@
 // Global Variables
-let currentUser = null;
 let currentBook = null;
 let currentSlideIndex = 0;
 let currentQuestionIndex = 0;
 let showQuiz = false;
-let userAnswers = [];
 let selectedAnswer = null;
-let startTime = null;
+let userAnswers = [];
 let timerInterval = null;
+let autoAdvanceTimeout = null; // Added for auto-advance tracking
 
 // Book Data
 const bookData = {
@@ -321,6 +320,34 @@ function loadSlide() {
     
     if (showQuiz) {
         loadQuestion();
+    } else {
+        // Clear any existing auto-advance timer
+        if (autoAdvanceTimeout) clearTimeout(autoAdvanceTimeout);
+        // Auto-advance to quiz or next slide after 30 seconds
+        autoAdvanceTimeout = setTimeout(() => {
+            nextSlide();
+        }, 30000); // 30 seconds
+    }
+}
+    
+    // Update progress
+    const progress = ((currentSlideIndex + (showQuiz ? 0.5 : 0)) / currentBook.slides.length) * 100;
+    document.getElementById('progressFill').style.width = progress + '%';
+    document.getElementById('progressText').textContent = Math.round(progress) + '%';
+    
+    // Update navigation buttons
+    const prevSlideBtn = document.getElementById('prevSlideBtn');
+    const nextSlideBtn = document.getElementById('nextSlideBtn');
+    
+    prevSlideBtn.style.display = currentSlideIndex > 0 ? 'flex' : 'none';
+    nextSlideBtn.textContent = showQuiz ? 'Next Question' : 'Start Quiz';
+    
+    // Show/hide quiz section
+    document.getElementById('slideContent').style.display = showQuiz ? 'none' : 'block';
+    document.getElementById('quizSection').style.display = showQuiz ? 'block' : 'none';
+    
+    if (showQuiz) {
+        loadQuestion();
     }
 }
 
@@ -365,10 +392,17 @@ function loadQuestion() {
     } else {
         nextQuestionBtn.innerHTML = 'Finish <i class="fas fa-check"></i>';
     }
+    
+    // Clear any existing auto-advance timer
+    if (autoAdvanceTimeout) clearTimeout(autoAdvanceTimeout);
+    // Auto-advance to next question/slide after 15 seconds if no answer is selected
+    autoAdvanceTimeout = setTimeout(() => {
+        if (selectedAnswer === null) {
+            selectAnswer(null); // Record no answer
+            nextQuestion();
+        }
+    }, 15000); // 15 seconds
 }
-
-function selectAnswer(answerIndex) {
-    selectedAnswer = answerIndex;
     
     // Update visual selection
     const options = document.querySelectorAll('.option');
