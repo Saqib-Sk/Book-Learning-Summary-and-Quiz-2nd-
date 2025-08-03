@@ -1,4 +1,4 @@
-// Global Variables
+//Global Variables
 let currentUser = null;
 let currentBook = null;
 let currentSlideIndex = 0;
